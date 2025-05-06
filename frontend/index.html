@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Frontend</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <h1>FRONTEND</h1>
+    <p>Cambia la ruta a localhost:3000/api/message</p>
+    <script>
+      fetch('http://127.0.0.1:3000/')
+        .then(response => response.text())
+        .then(data => {
+          document.body.innerHTML += `<p>${data}</p>`;
+        })
+        .catch(err => {
+          document.body.innerHTML += `<p>Error: ${err.message}</p>`;
+        });
+    </script>
+  </body>
+</html>
