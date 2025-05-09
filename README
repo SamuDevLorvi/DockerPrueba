@@ -1,3 +1,4 @@
 Levantar el proyecto completo con docker -> docker-compose up --build
 Visualizar front -> http://172.18.0.2:5173
-Visualizar back -> http://localhost:3000/api/message
+Visualizar back -> http://localhost:3000
+Hacer peticion a Base de datos -> http://localhost:3000/

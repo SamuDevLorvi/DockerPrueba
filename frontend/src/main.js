@@ -5,7 +5,10 @@ const App = {
 		const message = ref("Cargando...");
 
 		onMounted(async () => {
-			// const res = await fetch('http://localhost:3000/api/message');
+			console.log("HI");
+			const res = await fetch('http://localhost:3000/');
+			console.log("res",res);
+			
 			const data = await res.json();
 			message.value = data.message;
 		});

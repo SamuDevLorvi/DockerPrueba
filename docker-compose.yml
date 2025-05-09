@@ -1,32 +1,39 @@
 services:
-     backend:
-          build: ./backend
-          ports:
-               - "3000:3000"
-          environment:
-               - DB_HOST=mysql
-               - DB_USER=root
-               - DB_PASSWORD=my-secret-pw
-               - DB_NAME=mydatabase
-          depends_on:
-               - mysql
-          restart: always
-
-     frontend:
-          build: ./frontend
-          ports:
-               - "5173:5173"
-          restart: always
      mysql:
+          container_name: mysql
           image: mysql
           restart: always
           environment:
                MYSQL_ROOT_PASSWORD: my-secret-pw
                MYSQL_DATABASE: mydatabase
           ports:
-               - "3306:3306"
+               - 3306:3306
+          expose:
+               - "3306"
           volumes:
                - mysql-data:/var/lib/mysql
+
+     backend:
+          container_name: backend
+          build: ./backend
+          command: bash -c 'while !</dev/tcp/mysql/3306; do sleep 1; done; npm start'
+          ports:
+               - 3000:3000
+          environment:
+          #      - DB_HOST=mysql
+          #      - DB_USER=root
+          #      - DB_PASSWORD=my-secret-pw
+               DB_NAME: mydatabase
+          depends_on:
+               - mysql
+          restart: always
+     frontend:
+          container_name: frontend
+          build: ./frontend
+          ports:
+               - 5173:5173
+          restart: always
+     
 
 volumes:
      mysql-data:
