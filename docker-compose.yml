@@ -20,10 +20,10 @@ services:
           ports:
                - 3000:3000
           environment:
-          #      - DB_HOST=mysql
+               DB_HOST: mysql
+               DB_NAME: mydatabase
           #      - DB_USER=root
           #      - DB_PASSWORD=my-secret-pw
-               DB_NAME: mydatabase
           depends_on:
                - mysql
           restart: always
@@ -33,7 +33,6 @@ services:
           ports:
                - 5173:5173
           restart: always
-     
 
 volumes:
      mysql-data:
